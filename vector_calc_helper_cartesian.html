@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Vector Field Helper</title>
+
+<style>
+.hiddenTerm {display: none;}
+.visibleZeroTerm {color: blue;}
+</style>
+
+<script type="text/javascript" 
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=MML_CHTML">
+</script>
+
+<script type="text/javascript"
+ src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js">
+</script>
+
+
+<style>
+
+</style>
+</head>
+<body>
+  <h1>Vector Field Helper</h1>
+
+<label for="coordinateSystem">Which coordinate system is vector field <math><mi mathvariant="bold">V</mi></math> defined in?&nbsp;&nbsp;</label>
+
+<select name="coordinateSystem" id="coordinateSystem" onchange="changeCoordinateSystem()">
+  <option value="vector_calc_helper_cartesian.html">Cartesian</option>
+  <option value="vector_calc_helper_cylindrical.html">Cylindrical</option>
+  <option value="vector_calc_helper_spherical.html">Spherical</option>
+</select>
+
+<p></p> 
+
+
+Let <math><mi mathvariant="bold">V</mi></math> be a vector field defined in Cartesian coordinates (<math><mi>x</mi></math>, <math><mi>y</mi></math>, and <math><mi>z</mi></math>). Let <math><msub><mi>V</mi><mi>x</mi></msub></math>, <math><msub><mi>V</mi><mi>y</mi></msub></math>, and <math><msub><mi>V</mi><mi>z</mi></msub></math> denote the <math><mi>x</mi></math>, <math><mi>y</mi></math>, and <math><mi>z</mi></math> vector components of <math><mi mathvariant="bold">V</mi></math>, respectively. If a vector component is equal to zero or some other scalar constant (e.g., <math><msub><mi>V</mi><mi>x</mi></msub><mo>=</mo><mn>0</mn></math>), then it is a function of no variables. <br/> <br/>
+
+<!-- <h2>Questions about the Vector Field</h2> -->
+
+<table>
+
+<tr>
+  <td></td>
+  <td style="padding-right: 10em;"></td>
+  <td colspan="3">Zero Terms</td>
+</tr>
+
+  <tr>
+    <td>Which vector components is <math><mi mathvariant="bold">V</mi></math> defined for?</td>
+    <td>
+
+<input type="checkbox" id="vxCtrl"  data-bind="checked:vx" onclick="disableGroup('x')">
+  <label for="vehicle1"><math><mi>x</mi></math></label>
+<input type="checkbox" id="vyCtrl"  data-bind="checked:vy" onclick="disableGroup('y')">
+  <label for="vehicle1"><math><mi>y</mi></math></label>
+<input type="checkbox" id="vzCtrl"  data-bind="checked:vz" onclick="disableGroup('z')">
+  <label for="vehicle1"><math><mi>z</mi></math></label><br>
+</td>
+
+<td data-bind="visible:!vx()">
+<span>
+  <math><msub><mi>V</mi><mi>x</mi></msub><mo>=</mo><mn>0</mn>
+  </math>
+</span>
+</td>
+
+<td data-bind="visible:!vy()">
+<span>
+  <math><msub><mi>V</mi><mi>y</mi></msub><mo>=</mo><mn>0</mn></math>
+</span>
+</td>
+
+<td data-bind="visible:!vz()">
+<span><math><msub><mi>V</mi><mi>z</mi></msub><mo>=</mo><mn>0</mn></math></span>  
+</td>
+
+</tr>
+
+<tr>
+<td>The component <math><msub><mi>V</mi><mi>x</mi></msub></math> is a function of which (if any) variables:</td>
+<td>
+<input type="checkbox" id="vxxCtrl"  data-bind="enable: vx, checked:vxx">
+  <label for="vxxCtrl"><math><mi>x</mi></math></label>
+<input type="checkbox" id="vxyCtrl"  data-bind="enable: vx, checked:vxy" >
+  <label for="vxyCtrl"><math><mi>y</mi></math></label>
+<input type="checkbox" id="vxzCtrl"  data-bind="enable: vx, checked:vxz" >
+  <label for="vxzCtrl"><math><mi>z</mi></math></label><br>
+</td>
+
+<td data-bind="visible:!vxx()">
+<span>
+  <math>
+   <mfrac>
+    <mrow><mo>&part;</mo><msub><mi>V</mi><mi>x</mi></msub></mrow>
+    <mrow><mo>&part;</mo><mi>x</mi></mrow>
+    </mfrac>
+    <mo>=</mo><mn>0</mn>
+  </math>
+</span>
+</td>
+
+<td data-bind="visible:!vxy()">
+<span>
+  <math>
+   <mfrac>
+    <mrow><mo>&part;</mo><msub><mi>V</mi><mi>x</mi></msub></mrow>
+    <mrow><mo>&part;</mo><mi>y</mi></mrow>
+    </mfrac>
+    <mo>=</mo><mn>0</mn>
+  </math>
+</span>
+</td>
+
+<td data-bind="visible:!vxz()">
+<span>
+  <math>
+   <mfrac>
+    <mrow><mo>&part;</mo><msub><mi>V</mi><mi>x</mi></msub></mrow>
+    <mrow><mo>&part;</mo><mi>z</mi></mrow>
+    </mfrac>
+    <mo>=</mo><mn>0</mn>
+  </math>
+</span>
+</td>
+
+
+</tr>
+
+<tr>
+<td>The component <math><msub><mi>V</mi><mi>y</mi></msub></math> is a function of which (if any) variables:</td>
+<td>
+<input type="checkbox" id="vyxCtrl"  data-bind="enable:vy, checked:vyx">
+  <label for="vehicle1"><math><mi>x</mi></math></label>
+<input type="checkbox" id="vyyCtrl"  data-bind="enable:vy, checked:vyy">
+  <label for="vehicle1"><math><mi>y</mi></math></label>
+<input type="checkbox" id="vyzCtrl"  data-bind="enable:vy, checked:vyz">
+  <label for="vehicle1"><math><mi>z</mi></math></label><br>
+</td>
+
+<td data-bind="visible:!vyx()">
+<span>
+  <math>
+   <mfrac>
+    <mrow><mo>&part;</mo><msub><mi>V</mi><mi>y</mi></msub></mrow>
+    <mrow><mo>&part;</mo><mi>x</mi></mrow>
+    </mfrac>
+    <mo>=</mo><mn>0</mn>
+  </math>
+</span>
+</td>
+
+<td data-bind="visible:!vyy()">
+<span>
+  <math>
+   <mfrac>
+    <mrow><mo>&part;</mo><msub><mi>V</mi><mi>y</mi></msub></mrow>
+    <mrow><mo>&part;</mo><mi>y</mi></mrow>
+    </mfrac>
+    <mo>=</mo><mn>0</mn>
+  </math>
+</span>
+</td>
+
+<td data-bind="visible:!vyz()">
+<span>
+  <math>
+   <mfrac>
+    <mrow><mo>&part;</mo><msub><mi>V</mi><mi>y</mi></msub></mrow>
+    <mrow><mo>&part;</mo><mi>z</mi></mrow>
+    </mfrac>
+    <mo>=</mo><mn>0</mn>
+  </math>
+</span>
+</td>
+
+</tr>
+
+<tr>
+<td>The component <math><msub><mi>V</mi><mi>z</mi></msub></math> is a function of which (if any) variables:</td>
+<td>
+<input type="checkbox" id="vzxCtrl" data-bind="enable:vz, checked:vzx" >
+  <label for="vzxCtrl"><math><mi>x</mi></math></label>
+<input type="checkbox" id="vzyCtrl" data-bind="enable:vz, checked:vzy" >
+  <label for="vzyCtrl"><math><mi>y</mi></math></label>
+<input type="checkbox" id="vzzCtrl" data-bind="enable:vz, checked:vzz" >
+  <label for="vzzCtrl"><math><mi>z</mi></math></label>
+</td>
+
+
+<td data-bind="visible:!vzx()">
+<span>
+  <math>
+   <mfrac>
+    <mrow><mo>&part;</mo><msub><mi>V</mi><mi>z</mi></msub></mrow>
+    <mrow><mo>&part;</mo><mi>x</mi></mrow>
+    </mfrac>
+    <mo>=</mo><mn>0</mn>
+  </math>
+</span>
+</td>
+
+<td data-bind="visible:!vzy()"> 
+<span>
+  <math>
+   <mfrac>
+    <mrow><mo>&part;</mo><msub><mi>V</mi><mi>z</mi></msub></mrow>
+    <mrow><mo>&part;</mo><mi>y</mi></mrow>
+    </mfrac>
+    <mo>=</mo><mn>0</mn>
+  </math>
+</span>
+</td>
+
+<td data-bind="visible:!vzz()">
+<span>
+  <math>
+   <mfrac>
+    <mrow><mo>&part;</mo><msub><mi>V</mi><mi>z</mi></msub></mrow>
+    <mrow><mo>&part;</mo><mi>z</mi></mrow>
+    </mfrac>
+    <mo>=</mo><mn>0</mn>
+  </math>
+</span>
+
+</td>
+
+
+
+</tr>
+
+<tr>
+  <td>Show Zero Terms</td>
+  <td>
+    <input type="checkbox" data-bind="checked:showZeroTerms">
+  </td>
+</tr>
+
+</table>
+
+<p>The vectors <math><mi mathvariant="bold-italic">x</mi></math>, <math><mi mathvariant="bold-italic">y</mi></math>, <math><mi mathvariant="bold-italic">z</mi></math> denote the unit vectors in the <math><mi>x</mi></math>, <math><mi>y</mi></math>, and <math><mi>z</mi></math> directions respectively.</p> <span data-bind="visible:showZeroTerms">In the equations below, zero terms are shown in <span class="visibleZeroTerm">BLUE</span>.</span></p>
+
+<h2>Divergence of the Vector Field</h2>
+
+<center>
+<table>
+  <tr>
+    <td>
+      <math display="block">  
+      <mi>&Del;</mi>
+      <mo>&centerdot;</mo>
+      <mi mathvariant="bold"> V </mi>
+      <mo>=</mo>  
+    </math>
+    </td>
+
+    <td data-bind="class: termVisibility(vxx())">
+      <math display="block">  
+      <mrow id="frac1">
+      <mfrac class="vy">
+    <mrow><mo>&part;</mo><msub><mi>V</mi><mi>x</mi></msub></mrow>
+    <mrow><mo>&part;</mo><mi>x</mi></mrow>
+    </mfrac>
+      </mrow>  
+      </math>
+    </td>
+
+    <td data-bind="visible:(vxx() && (vyy() || vzz())) || showZeroTerms()"><math display="block"><mo>+</mo></math></td>
+
+    <td data-bind="class: termVisibility(vyy())">
+      <math display="block">  
+        <mrow id="frac2"> 
+    <mfrac class="vy">
+    <mrow><mo>&part;</mo><msub><mi>V</mi><mi>y</mi></msub></mrow>
+    <mrow><mo>&part;</mo><mi>y</mi></mrow>
+    </mfrac>
+    </mrow>
+      </math>  
+    </td>
+
+    <td data-bind="visible: (vyy() && vzz()) || showZeroTerms()"><math display="block"><mo>+</mo></math></td>
+
+    <td data-bind="class: termVisibility(vzz())">
+      <math display="block">
+        <mrow id="frac3"> 
+   <mfrac class="vz">
+    <mrow><mo>&part;</mo><msub><mi>V</mi><mi>z</mi></msub></mrow>
+    <mrow><mo>&part;</mo><mi>z</mi></mrow>
+    </mfrac>
+  </mrow>
+      </math>
+    </td>
+
+    <td data-bind="visible: !vxx() && !vzz() && !vyy() && !showZeroTerms()">
+      <math display="block"><mn>0</mn></math>
+    </td>
+  </tr>
+</table>
+</center>
+
+<h2>Curl of the Vector Field</h2>
+
+<center>
+<table>
+  <tr>
+    <td>
+      <math display="block">
+      <mi>&Del;</mi>
+      <mo>&times;</mo>
+      <mi mathvariant="bold">V</mi>
+      <mo>=</mo>
+    </math>
+    </td>
+
+    <td data-bind="visible: curlXTermsExist">
+      <math display="block">
+        <mi mathvariant="bold-italic" id="xvector"> x </mi>
+        </math>
+      </td>
+
+      <td data-bind="visible: curlXTermsExist">
+        <span class="mjx-char MJXc-TeX-size3-R" style="padding-top: 1.241em; padding-bottom: 1.241em;">(</span>
+      </td>
+
+      <td data-bind="class: termVisibility(vzy())">
+        <math display="block">
+      <mrow id="frac4"> 
+      <mfrac class="vz">
+      <mrow><mo>&part;</mo><msub><mi>V</mi><mi>z</mi></msub></mrow>
+      <mrow><mo>&part;</mo><mi>y</mi></mrow>
+      </mfrac>
+      </mrow>
+    </math>
+  </td>
+
+  <td data-bind="visible: vyz() || showZeroTerms()"><math display="block"><mo>&#x2212;</mo></math></td>
+
+  <td data-bind="class: termVisibility(vyz())"><math display="block">
+    <mrow id="frac5">
+    <mfrac id="frac5" class="vy">
+    <mrow><mo>&part;</mo><msub><mi>V</mi><mi>y</mi></msub></mrow>
+    <mrow><mo>&part;</mo><mi>z</mi></mrow>
+    </mfrac>
+    </mrow>
+      </math>
+    </td>
+
+    <td data-bind="visible: curlXTermsExist">
+      <span class="mjx-char MJXc-TeX-size3-R" style="padding-top: 1.241em; padding-bottom: 1.241em;">)</span>
+    </td>
+
+    <td data-bind="visible: curlXTermsExist() && (curlYTermsExist() || curlZTermsExist())">
+      <math display="block"><mo>+</mo></math></td>
+
+
+    <td data-bind="visible: curlYTermsExist">
+      <math display="block">
+        <mrow id="yterm">
+  <mi mathvariant="bold-italic" id="yvector"> y </mi>
+</mrow></math></td>
+
+<td data-bind="visible: curlYTermsExist">
+ <span class="mjx-char MJXc-TeX-size3-R" style="padding-top: 1.241em; padding-bottom: 1.241em;">(</span>
+      </td>
+
+
+  <td data-bind="class: termVisibility(vxz())">
+  <math display="block"> 
+   <mfrac id="frac6" class="vx">
+    <mrow><mo>&part;</mo><msub><mi>V</mi><mi>x</mi></msub></mrow>
+    <mrow><mo>&part;</mo><mi>z</mi></mrow>
+    </mfrac>
+  </math>
+</td>
+
+<td data-bind="visible:vzx() || showZeroTerms()"><math display="block"><mo>&#x2212;</mo></math></td>
+
+<td data-bind="class: termVisibility(vzx())">
+  <math display="block">
+    <mrow id="frac7">
+    <mfrac class="vz">
+    <mrow><mo>&part;</mo><msub><mi>V</mi><mi>z</mi></msub></mrow>
+    <mrow><mo>&part;</mo><mi>x</mi></mrow>
+    </mfrac>
+  </mrow>
+  </mfenced>
+    </mrow>
+      </math>
+    </td>
+
+<td data-bind="visible: curlYTermsExist">
+ <span class="mjx-char MJXc-TeX-size3-R" style="padding-top: 1.241em; padding-bottom: 1.241em;">)</span>
+      </td>
+
+<td data-bind="visible: curlYTermsExist() && curlZTermsExist()"><math display="block"><mo>+</mo></math></td>
+
+<td data-bind="visible: curlZTermsExist()">
+      <math display="block">
+        <mrow id="zterm">
+        <mi mathvariant="bold-italic" id="zvector"> z </mi>
+      </mrow></math></td>
+
+<td data-bind="visible: curlZTermsExist()">
+ <span class="mjx-char MJXc-TeX-size3-R" style="padding-top: 1.241em; padding-bottom: 1.241em;">(</span>
+      </td>
+
+
+<td data-bind="class: termVisibility(vyx())"><math display="block"> 
+        <mrow id="frac8">
+        <mfrac class="vx">
+        <mrow><mo>&part;</mo><msub><mi>V</mi><mi>y</mi></msub></mrow>
+        <mrow><mo>&part;</mo><mi>x</mi></mrow>
+      </mfrac>
+        </mrow>
+      </math></td>
+
+
+<td data-bind="visible: vxy() || showZeroTerms"><math display="block"><mo>&#x2212;</mo></math></td>
+
+<td data-bind="class: termVisibility(vxy())"><math display="block">
+        <mrow id="frac9">
+        <mfrac class="vx">
+        <mrow><mo>&part;</mo><msub><mi>V</mi><mi>x</mi></msub></mrow>
+        <mrow><mo>&part;</mo><mi>y</mi></mrow>
+      </mfrac>
+    </mrow>
+      </math>
+    </td>
+
+<td data-bind="visible: curlZTermsExist()">
+ <span class="mjx-char MJXc-TeX-size3-R" style="padding-top: 1.241em; padding-bottom: 1.241em;">)</span>
+      </td>
+
+<td data-bind="visible: !curlXTermsExist() && !curlYTermsExist() && !curlZTermsExist()">
+  <math display="block"><mn>0</mn></math>
+</td>
+
+
+</tr>
+</table>
+</center>
+
+
+<p> Designed and Programmed by Aaron Gaba - April 2022 </p>
+
+<script>
+
+
+  var viewModel = {
+    vx: ko.observable(true),
+    vy: ko.observable(true),
+    vz: ko.observable(true),
+    vxx: ko.observable(true),
+    vxy: ko.observable(true),
+    vxz: ko.observable(true),
+    vyx: ko.observable(true),
+    vyy: ko.observable(true),
+    vyz: ko.observable(true),
+    vzx: ko.observable(true),
+    vzy: ko.observable(true),
+    vzz: ko.observable(true),
+    showZeroTerms: ko.observable(false)
+  };
+
+
+  viewModel.curlXTermsExist = ko.computed(function() {
+    return viewModel.showZeroTerms() || viewModel.vzy() || viewModel.vyz();
+  });
+
+  viewModel.curlYTermsExist = ko.computed(function() {
+    return viewModel.showZeroTerms() || viewModel.vxz() || viewModel.vzx();
+  });
+
+    viewModel.curlZTermsExist = ko.computed(function() {
+    return viewModel.showZeroTerms() || viewModel.vyx() || viewModel.vxy();
+  });
+
+  ko.applyBindings(viewModel);
+
+
+  function termVisibility(term) {
+    if (!term) {
+      if (viewModel.showZeroTerms()) {
+        return "visibleZeroTerm";
+      }
+      else {
+        return "hiddenTerm";
+      }
+    }
+  }
+
+  function disableGroup(group) {
+    if (group == "x") {
+      viewModel.vxx(false);
+      viewModel.vxy(false);
+      viewModel.vxz(false);
+    }
+
+    if (group == "y") {
+      viewModel.vyx(false);
+      viewModel.vyy(false);
+      viewModel.vyz(false);
+    }
+
+    if (group == "z") {
+      viewModel.vzx(false);
+      viewModel.vzy(false);
+      viewModel.vzz(false);
+    }
+  }
+
+  function test() {
+    return viewModel.vzy() && viewModel.vyz();
+  }
+
+  function changeCoordinateSystem() {
+    window.location.href = document.getElementById("coordinateSystem").value;
+  }
+
+
+</script>
+
+</body>
+</html>
