@@ -255,6 +255,7 @@ Let <math><mi mathvariant="bold">V</mi></math> be a vector field defined in sphe
     </td>
 
     <td data-bind="class: termVisibility(vr())">
+      <span data-bind="visible: !vr() || vrr()">
       <math display="block">  
       <mrow id="frac1">
       <mfrac><mn>1</mn><msup><mi>R</mi><mn>2</mn></msup></mfrac> 
@@ -265,11 +266,22 @@ Let <math><mi mathvariant="bold">V</mi></math> be a vector field defined in sphe
       <mfenced separators=""><msup><mi>R</mi><mn>2</mn></msup><msub><mi>V</mi><mi>R</mi></msub></mfenced>
       </mrow>  
       </math>
+      </span>
+
+      <span data-bind="visible: vr() & !vrr()">
+      <math display="block">  
+      <mrow id="frac1">
+      <mfrac><mn>2</mn><mi>R</mi></mfrac> 
+      <mfenced separators=""><msub><mi>V</mi><mi>R</mi></msub></mfenced>
+      </mrow>  
+      </math>
+      </span>
     </td>
 
     <td data-bind="visible:(vr() && (vt() || vpp())) || (showZeroTerms())"><math display="block"><mo>+</mo></math></td>
 
     <td data-bind="class: termVisibility(vt())">
+      <span data-bind="visible: !vt() || vtt()">
       <math display="block">  
         <mrow id="frac2">
     <mfrac>
@@ -282,7 +294,22 @@ Let <math><mi mathvariant="bold">V</mi></math> be a vector field defined in sphe
     </mfrac>
     <mfenced separators=" "><msub><mi>V</mi><mi>&theta;</mi></msub><mi>sin</mi><mi>&theta;</mi></mfenced>
     </mrow>
-      </math>  
+      </math> 
+      </span> 
+
+      <span data-bind="visible: vt() && !vtt()">
+      <math display="block">  
+        <mrow id="frac2">
+    <mfrac>
+      <mn>1</mn>
+      <mrow><mi>R</mi><mi>sin</mi><mi>&theta;</mi>
+    </mfrac>   
+    <mfenced separators=" "><msub><mi>V</mi><mi>&theta;</mi></msub><mi>cos</mi><mi>&theta;</mi></mfenced>
+    </mrow>
+      </math> 
+      </span> 
+
+
     </td>
 
     <td data-bind="visible: (vt() && vpp()) || (showZeroTerms())"><math display="block"><mo>+</mo></math></td>
@@ -338,7 +365,8 @@ Let <math><mi mathvariant="bold">V</mi></math> be a vector field defined in sphe
       </td>
 
       <td data-bind="class: termVisibility(vp())">
-        <math display="block">
+      <span data-bind="visible: !vp() || vpt()">
+      <math display="block">
       <mrow id="frac4">
       <mfrac class="vy">
     <mrow><mo>&part;</mo></mrow>
@@ -348,11 +376,23 @@ Let <math><mi mathvariant="bold">V</mi></math> be a vector field defined in sphe
 
       </mrow>
     </math>
+  </span>
+
+  <span data-bind="visible: vp() && !vpt()">
+      <math display="block">
+      <mrow id="frac4">
+    <mfenced separators=""><msub><mi>V</mi><mi>&phi;</mi></msub><mi>cos</mi><mi>&theta;</mi></mfenced>
+
+      </mrow>
+    </math>
+  </span>
+
   </td>
 
   <td data-bind="visible: vtp() || showZeroTerms()"><math display="block"><mo>&#x2212;</mo></math></td>
 
-  <td data-bind="class: termVisibility(vtp())"><math display="block">
+  <td data-bind="class: termVisibility(vtp())">
+    <math display="block">
     <mrow id="frac5">
     <mfrac id="frac5" class="vy">
     <mrow><mo>&part;</mo><msub><mi>V</mi><mi>&theta;</mi></msub></mrow>
@@ -396,6 +436,8 @@ Let <math><mi mathvariant="bold">V</mi></math> be a vector field defined in sphe
 <td data-bind="visible: vp() || showZeroTerms()"><math display="block"><mo>&#x2212;</mo></math></td>
 
 <td data-bind="class: termVisibility(vp())">
+  
+  <span data-bind="visible: !vp() || vpr()">
   <math display="block">
     <mrow id="frac7">
     <mfrac class="vz">
@@ -408,6 +450,17 @@ Let <math><mi mathvariant="bold">V</mi></math> be a vector field defined in sphe
   </mfenced> 
   </mrow>
       </math>
+  </span>
+
+  <span data-bind="visible: vp() && !vpr()">
+  <math display="block">
+    <mrow id="frac7">
+    <msub><mi>V</mi><mi>&phi;</mi></msub>
+  </mrow>
+      </math>
+  </span>
+
+
     </td>
 
 <td data-bind="visible: curlThetaTermsExist">
@@ -431,6 +484,7 @@ Let <math><mi mathvariant="bold">V</mi></math> be a vector field defined in sphe
 
 
 <td data-bind="class: termVisibility(vt())">
+  <span data-bind="visible: !vt() || vtr()">
   <math display="block"> 
         <mrow id="frac8">
         <mfrac class="vy">
@@ -440,6 +494,17 @@ Let <math><mi mathvariant="bold">V</mi></math> be a vector field defined in sphe
         <mfenced separators=""><mi>R</mi><msub><mi>V</mi><mi>&theta;</mi></msub></mfenced>
         </mrow>
       </math>
+  </span>
+
+  <span data-bind="visible: vt() && !vtr()">
+  <math display="block"> 
+        <mrow id="frac8">
+        <msub><mi>V</mi><mi>&theta;</mi></msub>
+        </mrow>
+      </math>
+  </span>
+
+
     </td>
 
 
@@ -472,6 +537,7 @@ Let <math><mi mathvariant="bold">V</mi></math> be a vector field defined in sphe
 
 
 <p> Designed and Programmed by Aaron Gaba - April 2022 </p>
+<p> Updated in December 2022 </p>
 
 <script>
 
